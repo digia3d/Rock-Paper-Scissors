@@ -64,36 +64,3 @@ function resetGame() {
 }
 
 // Plays a round
-
-function playRound() {
-  if (round < 5) {
-    round++;
-    computerChoise = options[Math.floor(Math.random() * options.length)];
-    if (playerChoise === computerChoise) {
-      result.textContent = "It's a tie!😐";
-    }
-    else if (playerChoise === "rock" && computerChoise === "scissors") {
-      result.textContent = "You win!🥳";
-      playerScore++;
-    }
-    else if (playerChoise === "paper" && computerChoise === "rock") {
-      result.textContent = "You win!🥳";
-      playerScore++;
-    }
-    else if (playerChoise === "scissors" && computerChoise === "paper") {
-      result.textContent = "You win!🥳";
-      playerScore++;
-    }
-    else {
-      result.textContent = `Result: ${res}`;
-      computerScore++;
-    }
-    displaycomres.textContent = `Computer: ${computerScore}`;
-    displayplayerres.textContent = `Player: ${playerScore}`;
-  }
-  else {
-    declareWinner();
-    addPlayAgain();
-  }
-}
-
