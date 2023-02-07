@@ -47,3 +47,12 @@ function getResult(playerSelection, computerSelection) {
     return 'lose';
   }
 }
+
+function declareWinner(playerScore, computerScore) {
+  if (playerScore === 5) {
+    alert('You win! Congrats! Click "OK" to play again.');
+  } else if (computerScore === 5) {
+    alert('Computer wins. Better luck next time! Click "OK" to play again.');
+  }
+  resetScores();
+}
