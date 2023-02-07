@@ -33,3 +33,17 @@ function getComputerSelection() {
   const randomIndex = Math.floor(Math.random() * choices.length);
   return choices[randomIndex];
 }
+
+function getResult(playerSelection, computerSelection) {
+  if (playerSelection === computerSelection) {
+    return 'draw';
+  } else if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
+  ) {
+    return 'win';
+  } else {
+    return 'lose';
+  }
+}
