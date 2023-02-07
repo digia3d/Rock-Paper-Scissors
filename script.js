@@ -1,9 +1,11 @@
 const buttons = document.querySelectorAll('.buttons button');
 const playerScoreCount = document.querySelector('.player-score-count');
 const computerScoreCount = document.querySelector('.computer-score-count');
+const container = document.querySelector('.container');
 
 let playerScore = 0;
 let computerScore = 0;
+let playAgainButton;
 
 for (const button of buttons) {
   button.addEventListener('click', playRound);
@@ -25,6 +27,7 @@ function playRound(e) {
 
   if (playerScore === 5 || computerScore === 5) {
     declareWinner(playerScore, computerScore);
+    addPlayAgain();
   }
 }
 
@@ -48,13 +51,34 @@ function getResult(playerSelection, computerSelection) {
   }
 }
 
-function declareWinner(playerScore, computerScore) {
-  if (playerScore === 5) {
-    alert('You win! Congrats! Click "OK" to play again.');
-  } else if (computerScore === 5) {
-    alert('Computer wins. Better luck next time! Click "OK" to play again.');
+function declareWinner() {
+  let result = document.createElement("p");
+  result.classList.add("result");
+  if (playerScore > computerScore) {
+    result.textContent = "Great, You won the game! 🥳";
+  } else if (computerScore > playerScore) {
+    result.textContent = "GAME OVER. You lost 🥲";
+  } else {
+    result.textContent = "STALEMATE! It was a tie 😐!";
   }
+  container.appendChild(result);
+}
+
+function addPlayAgain() {
+  playAgainButton = document.createElement('button');
+  playAgainButton.classList.add('playAgain');
+  playAgainButton.textContent = 'Play Again';
+  playAgainButton.addEventListener('click', resetGame);
+  container.appendChild(playAgainButton);
+}
+
+function resetGame() {
+  playAgainButton.remove();
   resetScores();
+  let result = document.querySelector(".result");
+  if (result) {
+    result.remove();
+  }
 }
 
 function resetScores() {
