@@ -2,7 +2,7 @@ let playerChoise = "";
 let computerChoise = "";
 let playerScore = 0;
 let computerScore = 0;
-let round = 0;
+let rounds = 0;
 let res = "";
 
 const options = ["rock", "paper", "scissors"];
@@ -30,17 +30,17 @@ function chooseScissors() {
   return playerChoise;
 }
 
-// Compares the player and computer choices and returns the result
+// Compares the player and computer choices and returns the winner
 
 function declareWinner() {
   if (playerScore > computerScore) {
-    res.textContent = "You win!🥳";
+    result.textContent = "You win!🥳";
   }
   else if (playerScore < computerScore) {
-    res.textContent = "You lose!😭";
+    result.textContent = "GAME OVER. You lose!😭";
   }
   else {
-    res.textContent = "It's a tie!😐";
+    result.textContent = "It's a tie!😐";
   }
 }
 
@@ -58,9 +58,62 @@ function resetGame() {
   result.textContent = "";
   const playAgain = document.querySelector(".playAgain");
   container.removeChild(playAgain);
-  round = 0;
+  rounds = 0;
   displaycomres.textContent = `Computer: ${computerScore}`;
   displayplayerres.textContent = `Player: ${playerScore}`;
 }
 
 // Plays a round
+
+function playRound() {
+  computerChoise = options[Math.floor(Math.random() * 3)];
+  if (playerChoise === computerChoise) {
+    res = "It's a tie!😐";
+  }
+  else if (playerChoise === "rock" && computerChoise === "paper") {
+    res = "You lose!😭 Paper beats rock";
+    computerChoise += 1;
+  }
+  else if (playerChoise === "rock" && computerChoise === "scissors") {
+    res = "You win!🥳 Rock beats scissors";
+    playerChoise += 1;
+  }
+  else if (playerChoise === "paper" && computerChoise === "rock") {
+    res = "You win!🥳 Paper beats rock";
+    playerChoise += 1;
+  }
+  else if (playerChoise === "paper" && computerChoise === "scissors") {
+    res = "You lose!😭 Scissors beats paper";
+    computerChoise += 1;
+  }
+  else if (playerChoise === "scissors" && computerChoise === "rock") {
+    res = "You lose!😭 Rock beats scissors";
+    computerChoise += 1;
+  }
+  else if (playerChoise === "scissors" && computerChoise === "paper") {
+    res = "You win!🥳 Scissors beats paper";
+    playerChoise += 1;
+  }
+  result.textContent = `Result: ${res}`;
+  result.classList.add("result");
+  container.appendChild(result);
+  rounds++;
+  displaycomres[0].textContent = `Computer: ${computerScore}`;
+  displayplayerres[0].textContent = `Player: ${playerScore}`;
+
+  if (rounds === 5) {
+    declareWinner();
+    addPlayAgain();
+    playerScore = 0;
+    computerScore = 0;
+  }
+// resetGame if play again is clicked
+  
+  if (rounds > 5) {
+    resetGame();
+  }
+}
+
+// Event listeners
+
+
