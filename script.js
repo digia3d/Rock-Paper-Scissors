@@ -56,3 +56,10 @@ function declareWinner(playerScore, computerScore) {
   }
   resetScores();
 }
+
+function resetScores() {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreCount.textContent = playerScore;
+  computerScoreCount.textContent = computerScore;
+}
